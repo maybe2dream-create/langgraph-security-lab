@@ -1,0 +1,56 @@
+/* dark-theme.css
+ * 다크 모드(<html>에 'light' 클래스가 없을 때) 가독성 보강.
+ * 기존 다크 색은 배경과 글자·테두리의 차이가 작아 구분이 어려웠으므로,
+ *   - 카드·패널을 캔버스보다 한 단계 밝게(면 구분), 테두리를 뚜렷하게
+ *   - 흐린 글자(slate-400/500, 강조색 400/500)를 한 단계 밝게
+ * 바꾼다. 작은 글자(10~11px)는 라이트·다크 공통으로 12px로 키운다.
+ */
+[class~="text-[10px]"], [class~="text-[11px]"] { font-size:12px; }
+html:not(.light) [class~="divide-[#333333]"] > :not([hidden]) ~ :not([hidden]) { border-color:#64748b; }
+html:not(.light) .react-flow__edge-textbg { fill:#0f172a !important; fill-opacity:.95 !important; }
+html:not(.light) .react-flow__edge-text { fill:#e0e7ff !important; }
+html:not(.light) .react-flow__edge-path { stroke-width:2.5; }
+.react-flow__handle { background:#6366f1 !important; border-color:#ffffff !important; }
+.react-flow__handle[data-handleid^="b-"] { background:#d946ef !important; }
+
+/* 클래스별 색 치환 (자동 생성) */
+html:not(.light) [class~="bg-[#111111]"]{background-color:#0f172a}
+html:not(.light) [class~="bg-[#151515]"]{background-color:#172033}
+html:not(.light) [class~="bg-[#1e1e1e]"]{background-color:#1e293b}
+html:not(.light) [class~="bg-[#2d2d2d]"]{background-color:#334155}
+html:not(.light) [class~="bg-slate-700"]{background-color:#475569}
+html:not(.light) [class~="bg-slate-800"]{background-color:#334155}
+html:not(.light) [class~="bg-slate-800/50"]{background-color:rgba(51,65,85,.6)}
+html:not(.light) [class~="bg-slate-900"]{background-color:#1e293b}
+html:not(.light) [class~="bg-slate-900/80"]{background-color:rgba(30,41,59,.95)}
+html:not(.light) [class~="bg-slate-900/90"]{background-color:rgba(30,41,59,.97)}
+html:not(.light) [class~="border-[#111111]"]{border-color:#334155}
+html:not(.light) [class~="border-[#1e1e1e]"]{border-color:#1e293b}
+html:not(.light) [class~="border-[#333333]"]{border-color:#64748b}
+html:not(.light) [class~="border-slate-700"]{border-color:#64748b}
+html:not(.light) [class~="border-slate-700/50"]{border-color:#475569}
+html:not(.light) [class~="border-slate-800"]{border-color:#475569}
+html:not(.light) [class~="border-slate-800/60"]{border-color:#475569}
+html:not(.light) [class~="hover:bg-slate-600"]:hover{background-color:#64748b}
+html:not(.light) [class~="hover:bg-slate-700"]:hover{background-color:#475569}
+html:not(.light) [class~="hover:bg-slate-800"]:hover{background-color:#475569}
+html:not(.light) [class~="hover:text-indigo-400"]:hover{color:#a5b4fc}
+html:not(.light) [class~="hover:text-red-400"]:hover{color:#fca5a5}
+html:not(.light) [class~="hover:text-slate-200"]:hover{color:#ffffff}
+html:not(.light) [class~="text-amber-400"]{color:#fcd34d}
+html:not(.light) [class~="text-blue-400"]{color:#93c5fd}
+html:not(.light) [class~="text-emerald-400"]{color:#6ee7b7}
+html:not(.light) [class~="text-gray-200"]{color:#f3f4f6}
+html:not(.light) [class~="text-gray-300"]{color:#e5e7eb}
+html:not(.light) [class~="text-gray-400"]{color:#d1d5db}
+html:not(.light) [class~="text-green-400"]{color:#86efac}
+html:not(.light) [class~="text-indigo-400"]{color:#a5b4fc}
+html:not(.light) [class~="text-purple-400"]{color:#d8b4fe}
+html:not(.light) [class~="text-red-400"]{color:#fca5a5}
+html:not(.light) [class~="text-rose-400"]{color:#fda4af}
+html:not(.light) [class~="text-sky-400"]{color:#7dd3fc}
+html:not(.light) [class~="text-slate-200"]{color:#f1f5f9}
+html:not(.light) [class~="text-slate-300"]{color:#e2e8f0}
+html:not(.light) [class~="text-slate-400"]{color:#cbd5e1}
+html:not(.light) [class~="text-slate-500"]{color:#94a3b8}
+html:not(.light) [class~="text-yellow-500"]{color:#fde047}

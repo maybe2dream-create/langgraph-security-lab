@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="-apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker>
+    <marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7c3aed"/></marker>
+  </defs>
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <text x="640" y="44" text-anchor="middle" font-size="30" font-weight="700" fill="#0f172a">멀티 에이전트 시각화 대시보드 (06_visual_dashboard)</text>
+  <text x="640" y="76" text-anchor="middle" font-size="17" fill="#c2410c">주황색 번호 = 실행 순서 (6은 노드마다 반복)</text>
+
+  <!-- Panels -->
+  <rect x="30" y="100" width="390" height="500" rx="16" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text x="50" y="128" font-size="19" font-weight="700" fill="#0f172a">프론트엔드 · React (localhost:5173)</text>
+  <rect x="470" y="100" width="780" height="500" rx="16" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text x="490" y="128" font-size="19" font-weight="700" fill="#0f172a">백엔드 · FastAPI (127.0.0.1:8000)</text>
+
+  <g text-anchor="middle">
+    <!-- Frontend boxes -->
+    <rect x="60" y="150" width="330" height="80" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="225" y="182" font-size="19" font-weight="600" fill="#1e3a8a">FlowEditor.jsx</text>
+    <text x="225" y="208" font-size="15" fill="#1e3a8a">노드·엣지를 그려 그래프 구성</text>
+
+    <rect x="60" y="280" width="330" height="80" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="225" y="312" font-size="19" font-weight="600" fill="#1e3a8a">App.jsx</text>
+    <text x="225" y="338" font-size="15" fill="#1e3a8a">모드 · API 키 입력 → 서버에 전송</text>
+
+    <rect x="60" y="430" width="330" height="80" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="225" y="462" font-size="19" font-weight="600" fill="#14532d">MeetingChat.jsx</text>
+    <text x="225" y="488" font-size="15" fill="#14532d">WebSocket 수신 → 대화로 표시</text>
+
+    <rect x="60" y="530" width="330" height="56" rx="12" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2" stroke-dasharray="7 5"/>
+    <text x="225" y="553" font-size="15" font-weight="600" fill="#475569">localFlowRunner.js (로컬 모드)</text>
+    <text x="225" y="574" font-size="13" fill="#475569">백엔드 없이 브라우저가 직접 LLM 호출 · 키 필수</text>
+
+    <!-- Backend boxes -->
+    <rect x="500" y="280" width="220" height="80" rx="12" fill="#fef9c3" stroke="#ca8a04" stroke-width="2"/>
+    <text x="610" y="312" font-size="17" font-weight="600" fill="#713f12">POST /api/flow</text>
+    <text x="610" y="338" font-size="15" fill="#713f12">/execute</text>
+
+    <rect x="760" y="280" width="200" height="80" rx="12" fill="#fef9c3" stroke="#ca8a04" stroke-width="2"/>
+    <text x="860" y="312" font-size="18" font-weight="600" fill="#713f12">run_flow</text>
+    <text x="860" y="338" font-size="14" fill="#713f12">모드에 따라 분기</text>
+
+    <rect x="1000" y="280" width="230" height="80" rx="12" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="1115" y="308" font-size="16" font-weight="600" fill="#4c1d95">build_dynamic_graph</text>
+    <text x="1115" y="332" font-size="14" fill="#4c1d95">StateGraph 조립 · astream</text>
+    <text x="1115" y="350" font-size="13" fill="#4c1d95">노드마다 execute_agent</text>
+
+    <rect x="1000" y="150" width="230" height="80" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="1115" y="182" font-size="18" font-weight="600" fill="#14532d">LLM API</text>
+    <text x="1115" y="208" font-size="15" fill="#14532d">Gemini · DeepSeek · OpenAI</text>
+
+    <rect x="760" y="430" width="470" height="80" rx="12" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+    <text x="995" y="462" font-size="18" font-weight="600" fill="#7c2d12">broadcast_json → WebSocket /ws/chat</text>
+    <text x="995" y="488" font-size="15" fill="#7c2d12">노드 결과를 실시간으로 접속자에게 전송</text>
+  </g>
+
+  <!-- Edges -->
+  <g stroke="#475569" stroke-width="3" fill="none" marker-end="url(#a)">
+    <line x1="225" y1="230" x2="225" y2="276"/>
+    <line x1="390" y1="320" x2="496" y2="320"/>
+    <line x1="720" y1="320" x2="756" y2="320"/>
+    <line x1="960" y1="320" x2="996" y2="320"/>
+    <line x1="1115" y1="280" x2="1115" y2="234"/>
+    <line x1="1115" y1="360" x2="1115" y2="426"/>
+    <line x1="756" y1="470" x2="394" y2="470"/>
+  </g>
+  <text x="1130" y="262" font-size="13" fill="#475569">응답 반환</text>
+
+  <!-- Badges -->
+  <g fill="#f97316">
+    <circle cx="62" cy="152" r="17"/>
+    <circle cx="443" cy="304" r="17"/>
+    <circle cx="502" cy="282" r="17"/>
+    <circle cx="762" cy="282" r="17"/>
+    <circle cx="1002" cy="282" r="17"/>
+    <circle cx="1002" cy="152" r="17"/>
+    <circle cx="762" cy="432" r="17"/>
+    <circle cx="62" cy="432" r="17"/>
+  </g>
+  <g fill="#ffffff" font-size="20" font-weight="700" text-anchor="middle">
+    <text x="62" y="159">1</text>
+    <text x="443" y="311">2</text>
+    <text x="502" y="289">3</text>
+    <text x="762" y="289">4</text>
+    <text x="1002" y="289">5</text>
+    <text x="1002" y="159">6</text>
+    <text x="762" y="439">7</text>
+    <text x="62" y="439">8</text>
+  </g>
+
+  <!-- Modes -->
+  <rect x="30" y="620" width="1220" height="80" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <g fill="#334155" font-size="16">
+    <text x="50" y="650"><tspan font-weight="700">고정 시나리오</tspan>  step0 Prompt→Model→Parser · step1 에이전트 1개 · step2 PM→개발자</text>
+    <text x="50" y="680"><tspan font-weight="700">동적 그래프</tspan>  step4 PM↔개발자 핑퐁(최대 6회, [승인]이면 종료) · free 편집기에서 그린 그래프 그대로</text>
+  </g>
+</svg>
