@@ -52,6 +52,23 @@ python 06_visual_dashboard/backend/dashboard_main.py        # http://127.0.0.1:8
 | 04 | A 세션은 이름을 기억, B 세션은 모름 (세션 격리) | [04_memory.txt](results/04_memory.txt) |
 | 05 | 평가셋 6문항 기대 경로 **6/6** (rag 3 · fallback 1 · chat 2) | [paced](results/05_agentic_rag_paced.txt), [첫 실행 5/6](results/05_agentic_rag.txt) |
 | 06 | Step 3 상태 전달, Step 7 HITL 루프 (초안 → 수정 요청 → 재작성 → 승인) | [step3](results/06_dashboard_step3.jpg), [paused](results/06_dashboard_step7_paused.jpg), [revised](results/06_dashboard_step7_revised.jpg), [approved](results/06_dashboard_step7_approved.jpg) |
+| 06 자유 설계 | 직접 설계한 보안 게이트: 안전 → 작성 → **재작성**(비밀번호 노출 적발) → 고쳐 쓰기 → **통과** → END | [secure_gate](results/06_free_design_secure_gate.png) |
+
+## 자유 설계: 사내 AI 비서 보안 게이트
+
+06 대시보드의 자유 설계 모드로 직접 설계한 그래프입니다. 예제 시나리오 `free-secure-gate`로 들어 있습니다([scenarios.js](06_visual_dashboard/frontend/src/scenarios.js)).
+
+```
+START → 입력 검사기 ─안전→ 답변 작성자 → 출력 검토자 ─통과→ END
+                    │            ↑______재작성______│
+                    └─위험→ 차단 안내 → END
+```
+
+- **입력 검사(분기)**: 프롬프트 인젝션이나 민감정보 탈취 요청이면 "위험"으로 보내 차단합니다 (LLM01).
+- **출력 검토(루프)**: 답변에 실제 비밀번호 값이 있으면 "재작성"으로 작성자에게 되돌립니다 (LLM02 Sensitive Information Disclosure). 참고 자료에 섞인 임시 비밀번호(`Welcome!2026`, 데모용 가짜 값)가 첫 답변에 새어 나왔고, 검토자가 이를 적발했습니다.
+- **fail-safe 순서**: 판정 단어가 답변에 없으면 첫 번째 선으로 가므로 "위험"과 "재작성" 선을 먼저 두었습니다.
+- **노드 이름 규칙**: 답변 앞에 `[노드 이름]`이 붙어 판정 문자열에 섞이므로, 노드 이름에 선 이름(안전·위험·통과·재작성)을 넣지 않았습니다.
+- **기준 조정**: 처음에는 검토자가 값 없는 "임시 비밀번호를 입력" 문구까지 거부해 루프가 길어졌고, 무료 등급 한도(분당 15회)에 걸려 429가 났습니다. 그래서 "실제 값이 있을 때만 재작성"으로 기준을 좁혔습니다. 판정 기준이 모호하면 루프 비용이 커진다는 점을 확인했습니다 (LLM10).
 
 ## 보안 관점에서 확인한 것
 
